@@ -9,7 +9,17 @@ const Signup: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("User Created:", { name, email, password });
+
+    if (email && password.length >= 8) {
+      const userCreds = {name, email, password};
+      localStorage.setItem('user', JSON.stringify(userCreds))
+      alert(`Welcome ${name}. Your Credentials has been Saved!`)
+    } else {
+      alert('Password must atleast 8 characters')
+      return;
+    }
+
+
   };
 
   return (

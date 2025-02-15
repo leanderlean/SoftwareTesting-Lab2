@@ -43,6 +43,7 @@ input {
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 12px;
+  outline: 0;
 }
 
 button {
@@ -53,13 +54,19 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  outline: 0;
 }
 
 button:hover {
+  outline: 0;
   background-color: #0056b3;
 }
 
 .nav {
   background-color: white;
   color: black;
+}
+
+a:hover {
+  text-decoration: underline;
 }

@@ -8,7 +8,20 @@ const Login: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("User Created:", { email, password });
+
+    const checkUser = localStorage.getItem('user');
+    if (checkUser) {
+      const {email: storedEmail, password: storedPassword, name: storedName} = JSON.parse(checkUser)
+      
+      if (email === storedEmail && password === storedPassword) {
+        alert(`Welcome back ${storedName}!`)
+      } else {
+        alert("Incorrect email or password!")
+      }
+    } else {
+      alert("No account Found!")
+    }
+
   };
 
   return (
