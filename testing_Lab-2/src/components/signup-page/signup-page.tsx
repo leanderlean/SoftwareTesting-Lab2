@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./signup-page.module.css";
 
 const Signup: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (email && password.length >= 8) {
-      const userCreds = {name, email, password};
-      localStorage.setItem('user', JSON.stringify(userCreds))
-      alert(`Welcome ${name}. Your Credentials has been Saved!`)
+      const userCreds = { name, email, password };
+      localStorage.setItem("user", JSON.stringify(userCreds));
+      localStorage.setItem("loggedEmail", email);
+      alert(`Welcome ${name}. Your Credentials has been Saved!`);
+      navigate("/add-notes");
     } else {
-      alert('Password must atleast 8 characters')
+      alert("Password must atleast 8 characters");
       return;
     }
-
-
   };
 
   return (
