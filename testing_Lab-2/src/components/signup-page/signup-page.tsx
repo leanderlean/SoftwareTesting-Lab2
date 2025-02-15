@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "./signup-page.css";
 import { Link } from "react-router-dom";
-import LoginPage from "./login-page"
+import styles from "./signup-page.module.css";
 
-const CreateAccount: React.FC = () => {
+const Signup: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +13,7 @@ const CreateAccount: React.FC = () => {
   };
 
   return (
-    <div className="createAccountCont">
+    <div className={styles.createAccountCont}>
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -54,12 +53,14 @@ const CreateAccount: React.FC = () => {
         <br />
 
         <button type="submit">Sign Up</button>
-
-        {/* <p>Already have an account? <Link to="/loginpage">Log in</Link></p> */}
-
+        <div className={styles.nav}>
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
       </form>
     </div>
   );
 };
 
-export default CreateAccount;
+export default Signup;
