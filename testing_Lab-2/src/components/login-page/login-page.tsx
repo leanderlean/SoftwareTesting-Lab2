@@ -1,27 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./login-page.module.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const checkUser = localStorage.getItem('user');
+    const checkUser = localStorage.getItem("user");
     if (checkUser) {
-      const {email: storedEmail, password: storedPassword, name: storedName} = JSON.parse(checkUser)
-      
+      const {
+        email: storedEmail,
+        password: storedPassword,
+        name: storedName,
+      } = JSON.parse(checkUser);
+
       if (email === storedEmail && password === storedPassword) {
-        alert(`Welcome back ${storedName}!`)
+        localStorage.setItem("loggedEmail", email);
+        alert(`Welcome back ${storedName}!`);
+        navigate("/add-notes");
       } else {
-        alert("Incorrect email or password!")
+        alert("Incorrect email or password!");
       }
     } else {
-      alert("No account Found!")
+      alert("No account Found!");
     }
-
   };
 
   return (
