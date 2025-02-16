@@ -1,0 +1,98 @@
+.displayNotesCont {
+    margin-top: -120px;
+    position:relative;
+    background-color: #212020;
+    width: 100%; /* Ensure it takes the full width */
+    text-align: center;
+    padding: 20px 20px 20px 0px; 
+  }
+
+.backButton {
+    margin-right: 1260px;
+}
+  
+  .h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* FLEXBOX to align notes horizontally */
+  .notesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers items */
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Add spacing between items */
+    justify-content: center;
+  }
+  
+  .notes {
+    height: 100px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Set a fixed width to align properly */
+    text-align: left;
+    color: rgb(0, 0, 0);
+    margin-top: 2vh;
+  }
+  
+  .notes strong {
+    color: #000000;
+  }
+  
+  .notes p {
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .notes a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+  
+  .notes button {
+    color: rgb(0, 0, 0);
+    margin-top: 10px;
+    background-color: transparent;
+    color: blue;
+    margin-top: -2px;
+  }
+
+  .notes .downloadButton {
+    margin-right: 2px;
+    margin-left: 30px;
+  }
+
+  .notes .deleteButton {
+    color: red; 
+    margin-right: 2px;
+    margin-left: 50px;
+  }
+
+  
