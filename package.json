@@ -1,0 +1,35 @@
+{
+  "name": "testing_lab-2",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000S\u0000o\u0000f\u0000t\u0000w\u0000a\u0000r\u0000e\u0000T\u0000e\u0000s\u0000t\u0000i\u0000n\u0000g\u0000-\u0000L\u0000a\u0000b\u00002\u0000\r\u0000 \u0000S\u0000e\u0000t\u0000t\u0000i\u0000n\u0000g\u0000 \u0000U\u0000p\u0000 \u0000s\u0000t\u0000o\u0000r\u0000y\u0000B\u0000o\u0000o\u0000k\u0000\r\u0000 \u00001\u0000.\u0000 \u0000I\u0000n\u0000p\u0000u\u0000t\u0000 \u0000t\u0000o\u0000 \u0000t\u0000h\u0000e\u0000 \u0000t\u0000e\u0000r\u0000m\u0000i\u0000n\u0000a\u0000l\u0000 \u0000\"\u0000n\u0000p\u0000x\u0000 \u0000s\u0000t\u0000o\u0000r\u0000y\u0000b\u0000o\u0000o\u0000k\u0000@\u0000l\u0000a\u0000t\u0000e\u0000s\u0000t\u0000 \u0000i\u0000n\u0000i\u0000t\u0000\"\u0000\r\u0000 \u00002\u0000.\u0000 \u0000n\u0000p\u0000m\u0000 \u0000r\u0000u\u0000n\u0000 \u0000s\u0000t\u0000o\u0000r\u0000y\u0000b\u0000o\u0000o\u0000k\u0000\r\u0000 \u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leanderlean/SoftwareTesting-Lab2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leanderlean/SoftwareTesting-Lab2/issues"
+  },
+  "homepage": "https://github.com/leanderlean/SoftwareTesting-Lab2#readme",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.4",
+    "@storybook/addon-essentials": "^8.5.6",
+    "@storybook/addon-interactions": "^8.5.6",
+    "@storybook/addon-onboarding": "^8.5.6",
+    "@storybook/blocks": "^8.5.6",
+    "@storybook/react": "^8.5.6",
+    "@storybook/react-vite": "^8.5.6",
+    "@storybook/test": "^8.5.6",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.5.6"
+  }
+}
