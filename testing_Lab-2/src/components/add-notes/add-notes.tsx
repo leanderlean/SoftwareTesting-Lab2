@@ -10,10 +10,9 @@ interface Note {
   filePath?: string;
 }
 
-// ✅ Initialize IndexedDB properly
 const initializeDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("NotesDB", 2); // 🔹 Use version 2 to ensure upgrade
+    const request = indexedDB.open("NotesDB", 2);
 
     request.onupgradeneeded = (event) => {
       const db = (event.target as IDBOpenDBRequest).result;
@@ -22,41 +21,44 @@ const initializeDB = (): Promise<IDBDatabase> => {
       }
     };
 
-    request.onsuccess = (event) => resolve((event.target as IDBOpenDBRequest).result);
+    request.onsuccess = (event) =>
+      resolve((event.target as IDBOpenDBRequest).result);
     request.onerror = () => reject(new Error("Failed to open IndexedDB"));
   });
 };
 
-// ✅ Save file to IndexedDB
-const saveFileToIndexedDB = async (file: File): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const db = await initializeDB();
-      const reader = new FileReader();
+const saveFileToIndexedDB = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const handleFile = async () => {
+      try {
+        const db = await initializeDB();
+        const reader = new FileReader();
 
-      reader.onload = () => {
-        const transaction = db.transaction("files", "readwrite");
-        const store = transaction.objectStore("files");
+        reader.onload = () => {
+          const transaction = db.transaction("files", "readwrite");
+          const store = transaction.objectStore("files");
 
-        const fileData = {
-          fileName: file.name,
-          content: reader.result, // Base64 encoded file
+          const fileData = {
+            fileName: file.name,
+            content: reader.result,
+          };
+
+          const putRequest = store.put(fileData);
+          putRequest.onsuccess = () => resolve(file.name);
+          putRequest.onerror = () => reject(new Error("Failed to store file"));
         };
 
-        const putRequest = store.put(fileData);
-        putRequest.onsuccess = () => resolve(file.name);
-        putRequest.onerror = () => reject(new Error("Failed to store file"));
-      };
+        reader.onerror = () => reject(new Error("Failed to read file"));
+        reader.readAsDataURL(file);
+      } catch (error) {
+        reject(error);
+      }
+    };
 
-      reader.onerror = () => reject(new Error("Failed to read file"));
-      reader.readAsDataURL(file);
-    } catch (error) {
-      reject(error);
-    }
+    handleFile();
   });
 };
 
-// ✅ Main component
 const AddNote: React.FC = () => {
   const email = localStorage.getItem("loggedEmail");
   const [subject, setSubject] = useState("");
@@ -65,7 +67,6 @@ const AddNote: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // ✅ Handle adding a note
   const handleAddNote = async () => {
     if (!subject || !topic || !description) {
       alert("Please fill all required fields.");
@@ -78,19 +79,17 @@ const AddNote: React.FC = () => {
         filePath = await saveFileToIndexedDB(file);
       } catch (error) {
         console.error("Error saving file:", error);
-        return; // Stop execution if file saving fails
+        return;
       }
     }
 
     const newNote: Note = { email, subject, topic, description, filePath };
 
-    // Retrieve current notes and update state
     const storedNotes = JSON.parse(localStorage.getItem("notes") || "[]");
     const updatedNotes = [...storedNotes, newNote];
 
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
 
-    // Reset form fields
     setSubject("");
     setTopic("");
     setDescription("");
@@ -128,7 +127,7 @@ const AddNote: React.FC = () => {
         placeholder="Add Description"
         onChange={(e) => setDescription(e.target.value)}
       />
-      
+
       <input
         className={styles.input}
         type="file"
