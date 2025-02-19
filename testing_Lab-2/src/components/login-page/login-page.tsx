@@ -2,15 +2,27 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./login-page.module.css";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+interface LoginProps {
+  initialEmail?: string;
+  initialPassword?: string;
+  onLoginSuccess?: (email: string) => void;
+  onLoginError?: (error: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({
+  initialEmail = "",
+  initialPassword = "",
+  onLoginSuccess,
+  onLoginError,
+}) => {
+  const [email, setEmail] = useState<string>(initialEmail);
+  const [password, setPassword] = useState<string>(initialPassword);
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
     const checkUser = localStorage.getItem("user");
+
     if (checkUser) {
       const {
         email: storedEmail,
@@ -20,13 +32,16 @@ const Login: React.FC = () => {
 
       if (email === storedEmail && password === storedPassword) {
         localStorage.setItem("loggedEmail", email);
+        onLoginSuccess?.(email); // Call the success callback if provided
         alert(`Welcome back ${storedName}!`);
         navigate("/add-notes");
       } else {
+        onLoginError?.("Incorrect email or password!");
         alert("Incorrect email or password!");
       }
     } else {
-      alert("No account Found!");
+      onLoginError?.("No account found!");
+      alert("No account found!");
     }
   };
 

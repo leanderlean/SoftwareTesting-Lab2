@@ -1,48 +1,59 @@
 /* add-notes.module.css */
 .container {
-    max-width: 40vw;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #000000;
-    font-size: 5.2vh;
-  }
-  
-  .input {
-    height: 4.8vh;
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 16px;
-    font-size: 16px;
-  }
-  
-  .fileInput {
-    margin: 10px 0;
-  }
-  
-  .button {
-    outline: 0;
-    height: 6.4vh;
-    width: 90%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-    outline: 0;
-  }
-  
+  max-width: 40vw;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+h2 {
+  color: #000000;
+  font-size: 5.2vh;
+}
+
+.input {
+  height: 4.8vh;
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  font-size: 16px;
+}
+
+.fileInput {
+  margin: 10px 0;
+}
+
+.button {
+  outline: 0;
+  height: 6.4vh;
+  width: 90%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  outline: 0;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  margin-bottom: 8px;
+}

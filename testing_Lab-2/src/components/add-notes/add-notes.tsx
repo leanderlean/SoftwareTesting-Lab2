@@ -2,14 +2,6 @@ import React, { useState, useRef } from "react";
 import styles from "./add-notes.module.css";
 import { Link } from "react-router-dom";
 
-interface Note {
-  email: string | null;
-  subject: string;
-  topic: string;
-  description: string;
-  filePath?: string;
-}
-
 const initializeDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("NotesDB", 2);
@@ -59,19 +51,41 @@ const saveFileToIndexedDB = (file: File): Promise<string> => {
   });
 };
 
-const AddNote: React.FC = () => {
+interface Note {
+  email: string | null;
+  subject: string;
+  topic: string;
+  description: string;
+  filePath?: string;
+}
+
+interface AddNoteProps {
+  initialSubject?: string;
+  initialTopic?: string;
+  initialDescription?: string;
+}
+
+const AddNote: React.FC<AddNoteProps> = ({
+  initialSubject = "",
+  initialTopic = "",
+  initialDescription = "",
+}) => {
   const email = localStorage.getItem("loggedEmail");
-  const [subject, setSubject] = useState("");
-  const [topic, setTopic] = useState("");
-  const [description, setDescription] = useState("");
+  const [subject, setSubject] = useState<string>(initialSubject);
+  const [topic, setTopic] = useState<string>(initialTopic);
+  const [description, setDescription] = useState<string>(initialDescription);
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successfullMessage, setSuccessfullMessage] = useState<string | null>(
+    null
+  );
   const handleAddNote = async () => {
     if (!subject || !topic || !description) {
-      alert("Please fill all required fields.");
+      setErrorMessage("Please fill all required fields!");
       return;
     }
+    setErrorMessage(null);
 
     let filePath = "";
     if (file) {
@@ -98,7 +112,7 @@ const AddNote: React.FC = () => {
       fileInputRef.current.value = "";
     }
 
-    alert("Note added successfully!");
+    setSuccessfullMessage("Note added successfully!");
   };
 
   return (
@@ -108,6 +122,12 @@ const AddNote: React.FC = () => {
       </Link>
 
       <h2>ADD NOTE</h2>
+
+      {(errorMessage || successfullMessage) && (
+        <p className={errorMessage ? styles.error : styles.success}>
+          {errorMessage || successfullMessage}
+        </p>
+      )}
 
       <input
         className={styles.input}
@@ -131,6 +151,7 @@ const AddNote: React.FC = () => {
       <input
         className={styles.input}
         type="file"
+        data-testid="file-input"
         ref={fileInputRef}
         onChange={(e) => setFile(e.target.files?.[0] || null)}
       />
