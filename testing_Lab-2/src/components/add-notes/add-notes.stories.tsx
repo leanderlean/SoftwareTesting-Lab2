@@ -20,8 +20,7 @@ type Story = StoryObj<typeof AddNote>;
 
 export const Default: Story = {};
 
-export const FilledInputs: Story = {
-  name: "Filled inputs UI",
+export const PrefilledLogin: Story = {
   args: {
     initialSubject: "Science",
     initialTopic: "Geology",
@@ -29,8 +28,7 @@ export const FilledInputs: Story = {
   },
 };
 
-export const ErrorState: Story = {
-  name: "Error State UI",
+export const AddNoteResponse: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -45,7 +43,6 @@ export const ErrorState: Story = {
 };
 
 export const UserInteraction: Story = {
-  name: "Simulated User Interaction",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
