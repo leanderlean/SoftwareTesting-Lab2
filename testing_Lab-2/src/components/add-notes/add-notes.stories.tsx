@@ -32,10 +32,8 @@ export const AddNoteResponse: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Click the "Add Note" button
     await userEvent.click(canvas.getByRole("button", { name: /add note/i }));
 
-    // Wait for the error message to appear
     await expect(
       canvas.findByText("Please fill all required fields!")
     ).resolves.toBeInTheDocument();
@@ -46,23 +44,33 @@ export const UserInteraction: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.type(canvas.getByPlaceholderText("Add Subject"), "Math");
-    await userEvent.type(canvas.getByPlaceholderText("Add Topic"), "Algebra");
+    await userEvent.type(canvas.getByPlaceholderText("Add Subject"), "Math", {
+      delay: 100,
+    });
+    await userEvent.type(canvas.getByPlaceholderText("Add Topic"), "Algebra", {
+      delay: 100,
+    });
     await userEvent.type(
       canvas.getByPlaceholderText("Add Description"),
-      "Notes for factoring"
+      "Notes for factoring",
+      { delay: 100 }
     );
 
     const fileInput = canvas.getByTestId("file-input");
     const file = new File(["dummy content"], "notes.pdf", {
       type: "application/pdf",
     });
-    await userEvent.upload(fileInput, file);
+    await userEvent.upload(fileInput, file, { delay: 100 });
 
     await userEvent.click(canvas.getByRole("button", { name: /add note/i }));
 
-    await waitFor(() => {
-      expect(canvas.getByText("Note added successfully!")).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(
+          canvas.getByText("Note added successfully!")
+        ).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
   },
 };

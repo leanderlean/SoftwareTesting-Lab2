@@ -31,13 +31,11 @@ export const LoginResponse: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Click the "Add Note" button
     await userEvent.click(canvas.getByRole("button", { name: /log in/i }));
 
-    // Wait for the error message to appear
     await expect(
       canvas.findByText(
-        /Incorrect email or password!|No account found!|`Welcome back ${storedName}!`/
+        /Incorrect email or password!|No account found!|`Welcome back .*!`/
       )
     ).resolves.toBeInTheDocument();
   },

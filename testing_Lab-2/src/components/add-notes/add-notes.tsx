@@ -76,16 +76,14 @@ const AddNote: React.FC<AddNoteProps> = ({
   const [description, setDescription] = useState<string>(initialDescription);
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successfullMessage, setSuccessfullMessage] = useState<string | null>(
-    null
-  );
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successfullMessage, setSuccessfullMessage] = useState<string>("");
   const handleAddNote = async () => {
     if (!subject || !topic || !description) {
       setErrorMessage("Please fill all required fields!");
       return;
     }
-    setErrorMessage(null);
+    setErrorMessage("");
 
     let filePath = "";
     if (file) {
@@ -113,6 +111,7 @@ const AddNote: React.FC<AddNoteProps> = ({
     }
 
     setSuccessfullMessage("Note added successfully!");
+    setTimeout(() => setSuccessfullMessage(""), 3000);
   };
 
   return (

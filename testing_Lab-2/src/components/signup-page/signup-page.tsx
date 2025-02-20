@@ -18,7 +18,7 @@ const Signup: React.FC = () => {
       alert(`Welcome ${name}. Your Credentials has been Saved!`);
       navigate("/add-notes");
     } else {
-      alert("Inpu all fields first!");
+      alert("Input all fields first!");
       return;
     }
   };

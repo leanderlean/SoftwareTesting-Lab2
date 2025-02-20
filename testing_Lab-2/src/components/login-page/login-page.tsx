@@ -13,16 +13,14 @@ const Login: React.FC<LoginProps> = ({
 }) => {
   const [email, setEmail] = useState<string>(initialEmail);
   const [password, setPassword] = useState<string>(initialPassword);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successfullMessage, setSuccessfullMessage] = useState<string | null>(
-    null
-  );
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successfullMessage, setSuccessfullMessage] = useState<string>("");
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setErrorMessage(null);
-    setSuccessfullMessage(null);
+    setErrorMessage("");
+    setSuccessfullMessage("");
 
     const checkUser = localStorage.getItem("user");
 
@@ -36,7 +34,7 @@ const Login: React.FC<LoginProps> = ({
       if (email === storedEmail && password === storedPassword) {
         localStorage.setItem("loggedEmail", email);
         setSuccessfullMessage(`Welcome back ${storedName}!`);
-        navigate("/add-notes");
+        setTimeout(() => navigate("/add-notes"), 1500);
       } else {
         setErrorMessage("Incorrect email or password!");
       }
