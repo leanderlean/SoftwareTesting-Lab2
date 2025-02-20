@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within, expect } from "@storybook/test";
+import { userEvent, within } from "@storybook/test";
 import { BrowserRouter } from "react-router-dom";
 import Signup from "./signup-page";
 
@@ -25,7 +25,7 @@ export const EmptyInputAlert: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const signupButton = await canvas.getByRole("button", { name: /sign up/i });
-    
+
     await userEvent.click(signupButton);
   },
 };
@@ -38,16 +38,18 @@ export const PrefilledSignup: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    
+
     const nameInput = await canvas.getByPlaceholderText("Enter your name");
     const emailInput = await canvas.getByPlaceholderText("Enter your email");
-    const passwordInput = await canvas.getByPlaceholderText("Enter your password");
+    const passwordInput = await canvas.getByPlaceholderText(
+      "Enter your password"
+    );
     const signupButton = await canvas.getByRole("button", { name: /sign up/i });
 
-    await userEvent.type(nameInput, "Leander Galido", {delay: 100});
-    await userEvent.type(emailInput, "leander05@gmail.com", {delay: 100});
-    await userEvent.type(passwordInput, "qwertyuiop", {delay: 100});
-    
+    await userEvent.type(nameInput, "Leander Galido", { delay: 100 });
+    await userEvent.type(emailInput, "leander05@gmail.com", { delay: 100 });
+    await userEvent.type(passwordInput, "qwertyuiop", { delay: 100 });
+
     await userEvent.click(signupButton);
   },
 };
@@ -59,16 +61,18 @@ export const WithCallbacks: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    
+
     const nameInput = await canvas.getByPlaceholderText("Enter your name");
     const emailInput = await canvas.getByPlaceholderText("Enter your email");
-    const passwordInput = await canvas.getByPlaceholderText("Enter your password");
+    const passwordInput = await canvas.getByPlaceholderText(
+      "Enter your password"
+    );
     const signupButton = await canvas.getByRole("button", { name: /sign up/i });
 
-    await userEvent.type(nameInput, "Ashton Regalado", {delay: 100});
-    await userEvent.type(emailInput, "ashton@gmal.com", {delay: 100});
-    await userEvent.type(passwordInput, "12345678", {delay: 100});
-    
+    await userEvent.type(nameInput, "Ashton Regalado", { delay: 100 });
+    await userEvent.type(emailInput, "ashton@gmal.com", { delay: 100 });
+    await userEvent.type(passwordInput, "12345678", { delay: 100 });
+
     await userEvent.click(signupButton);
   },
 };
