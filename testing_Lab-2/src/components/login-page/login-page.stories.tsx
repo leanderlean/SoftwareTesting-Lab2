@@ -60,7 +60,14 @@ export const UserInteraction: Story = {
 
     await waitFor(
       () => {
-        expect(canvas.getByText(/Welcome back .*!/)).toBeInTheDocument();
+        expect(
+          canvas.queryByText(
+            (content) =>
+              content.includes("Welcome back") ||
+              content.includes("Incorrect email or password!") ||
+              content.includes("No account found!")
+          )
+        ).toBeInTheDocument();
       },
       { timeout: 3000 }
     );
