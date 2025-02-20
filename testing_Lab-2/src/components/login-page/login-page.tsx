@@ -34,7 +34,7 @@ const Login: React.FC<LoginProps> = ({
       if (email === storedEmail && password === storedPassword) {
         localStorage.setItem("loggedEmail", email);
         setSuccessfullMessage(`Welcome back ${storedName}!`);
-        navigate("/add-notes");
+        setTimeout(() => navigate("/add-notes"), 1500);
       } else {
         setErrorMessage("Incorrect email or password!");
       }

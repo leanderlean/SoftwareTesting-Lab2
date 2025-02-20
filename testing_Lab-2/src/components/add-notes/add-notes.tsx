@@ -111,6 +111,7 @@ const AddNote: React.FC<AddNoteProps> = ({
     }
 
     setSuccessfullMessage("Note added successfully!");
+    setTimeout(() => setSuccessfullMessage(""), 3000);
   };
 
   return (
