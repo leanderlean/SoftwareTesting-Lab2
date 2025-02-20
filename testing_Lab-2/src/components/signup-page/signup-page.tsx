@@ -18,7 +18,7 @@ const Signup: React.FC = () => {
       alert(`Welcome ${name}. Your Credentials has been Saved!`);
       navigate("/add-notes");
     } else {
-      alert("Password must atleast 8 characters");
+      alert("Inpu all fields first!");
       return;
     }
   };
